@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import entorno.Entorno;
 
+
+
 public class Soldado {
 	double x;
 	double y;
