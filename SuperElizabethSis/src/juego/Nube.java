@@ -30,6 +30,7 @@ public class Nube {
 	}
 	
 	public void moverAdelante() {
+		
 		this.x -= Math.cos(this.angulo)*1;
 		this.y += Math.sin(this.angulo)*2;
 		

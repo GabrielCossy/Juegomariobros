@@ -1,7 +1,7 @@
 package juego;
 
 
-
+import java.awt.Color;
 import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -14,6 +14,7 @@ public class Juego extends InterfaceJuego
 	//dsfsdfsdfsdf
 	//sdasdasd
 	public static final String Princesa = null;
+	private static final String Puntaje = null;
 	// El objeto Entorno que controla el tiempo y otros
 	private Entorno entorno;
 	private Obstaculo obstaculo;
@@ -21,12 +22,12 @@ public class Juego extends InterfaceJuego
 	private Nube nube;
 	
 	
+	
 	public Object x;
 	
 	// Variables y métodos propios de cada grupo
 	// ...
-	//Image fondo;
-	//fondo=Herramientas.cargarImagen("fondo.png");
+	
 	Juego()
 	{
 		// Inicializa el objeto entorno
@@ -52,12 +53,30 @@ public class Juego extends InterfaceJuego
 	 */
 	public void tick()
 	{
+		
 		// Procesamiento de un instante de tiempo
 		// ...
 		this.soldado.moverAdelante();
 		this.obstaculo.moverAdelante();
 		this.nube.moverAdelante();
 		
+		if (entorno.estaPresionada(entorno.TECLA_DERECHA))
+			this.princesa.moverAtras();
+
+		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
+			this.princesa.moverAdelante();
+		
+		//if (entorno.estaPresionada(entorno.TECLA_ARRIBA))
+		//	this.princesa.moverArriba(); no me salio pa q salte
+			
+		int contVidas = 3;
+		int Puntaje = 0;
+		
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("Cantidad de vidas: " + contVidas, 550, 50);
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("puntaje: " + Puntaje, 550, 25);
+			
 		
 		this.princesa.dibujarse(this.entorno);
 		this.soldado.dibujarse(entorno);

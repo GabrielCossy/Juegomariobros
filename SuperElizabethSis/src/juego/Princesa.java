@@ -20,5 +20,17 @@ public class Princesa {
 	public void dibujarse(Entorno entorno) {
 		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.GREEN);
 	}
-
-}
+	
+	public void moverAtras() {			
+		x=x+1;			
+	}	
+	public void moverAdelante() {			
+		x=x-1;	
+	}
+	//public void moverArriba() {	no me salio pa que salte	
+	//	y=y-10;		
+	//}		
+	
+	}
+	
+	
