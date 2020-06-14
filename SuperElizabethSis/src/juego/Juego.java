@@ -43,9 +43,9 @@ public class Juego extends InterfaceJuego
 		this.soldado[0]=new Soldado(800,480,20,40,0);
 		
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
-		this.obstaculo[1]=new Obstaculo(750,480,20,60,0);
-		this.obstaculo[2]=new Obstaculo(800,480,20,60,0);
-		this.obstaculo[3]=new Obstaculo(850,480,20,60,0);
+		this.obstaculo[1]=new Obstaculo(800,480,20,60,0);
+		this.obstaculo[2]=new Obstaculo(950,480,20,60,0);
+		this.obstaculo[3]=new Obstaculo(1000,480,20,60,0);
 		
 		this.nube=new Nube(200,100,100,60,0);
 
@@ -92,7 +92,7 @@ public class Juego extends InterfaceJuego
 		entorno.cambiarFont("Arial", 18, Color.white);
 		entorno.escribirTexto("Cantidad de vidas: " + contVidas, 550, 50);
 		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("puntaje: " + Puntaje, 550, 25);
+		entorno.escribirTexto("puntaje: " + puntaje, 550, 25);
 			
 		
 		//dibujos
