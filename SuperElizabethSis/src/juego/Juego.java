@@ -73,14 +73,16 @@ public class Juego extends InterfaceJuego
 			for(int i=0;i<obstaculo.length;i++) {
 
 				obstaculo[i].moverAdelante();
+			}
 
 		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
 			this.princesa.moverAdelante();
 		
 		//movimiento soldados
-		for(int j=0;j<soldado.length;j++) {
+		for(int i=0;i<soldado.length;i++) {
 
-			soldado[j].moverAdelante();
+			soldado[i].moverAdelante();
+		}
 		
 		//if (entorno.estaPresionada(entorno.TECLA_ARRIBA))
 		//	this.princesa.moverArriba(); no me salio pa q salte
@@ -93,9 +95,15 @@ public class Juego extends InterfaceJuego
 		entorno.escribirTexto("puntaje: " + Puntaje, 550, 25);
 			
 		
-		
+		//dibujos
 		this.princesa.dibujarse(this.entorno);
 
+		for(int i=0;i<obstaculo.length;i++) {
+			this.obstaculo[i].dibujarse(this.entorno);
+		}
+		for(int i=0;i<obstaculo.length;i++) {
+			this.obstaculo[i].dibujarse(this.entorno);
+		}
 		this.nube.dibujarse(entorno);
 		
 		
