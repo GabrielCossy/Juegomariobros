@@ -43,9 +43,9 @@ public class Juego extends InterfaceJuego
 		this.soldado[0]=new Soldado(800,480,20,40,0);
 		
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
-		this.obstaculo[1]=new Obstaculo(700,480,20,60,0);
-		this.obstaculo[2]=new Obstaculo(700,480,20,60,0);
-		this.obstaculo[3]=new Obstaculo(700,480,20,60,0);
+		this.obstaculo[1]=new Obstaculo(750,480,20,60,0);
+		this.obstaculo[2]=new Obstaculo(800,480,20,60,0);
+		this.obstaculo[3]=new Obstaculo(850,480,20,60,0);
 		
 		this.nube=new Nube(200,100,100,60,0);
 
@@ -101,8 +101,8 @@ public class Juego extends InterfaceJuego
 		for(int i=0;i<obstaculo.length;i++) {
 			this.obstaculo[i].dibujarse(this.entorno);
 		}
-		for(int i=0;i<obstaculo.length;i++) {
-			this.obstaculo[i].dibujarse(this.entorno);
+		for(int i=0;i<soldado.length;i++) {
+			this.soldado[i].dibujarse(this.entorno);
 		}
 		this.nube.dibujarse(entorno);
 		
