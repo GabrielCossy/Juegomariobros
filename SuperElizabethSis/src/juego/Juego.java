@@ -10,17 +10,17 @@ import entorno.InterfaceJuego;
 public class Juego extends InterfaceJuego
 {
 	Princesa princesa;	
-	//asdtrhyt
-	//dsfsdfsdfsdf
-	//sdasdasd
+	
+	
 	public static final String Princesa = null;
 	private static final String Puntaje = null;
 	// El objeto Entorno que controla el tiempo y otros
 	private Entorno entorno;
-	private Obstaculo obstaculo;
-	private Soldado soldado;
+	private Obstaculo[] obstaculo;
+	private Soldado[] soldado;
 	private Nube nube;
-	
+	int contVidas = 3;
+	int puntaje = 0;
 	
 	
 	public Object x;
@@ -35,11 +35,20 @@ public class Juego extends InterfaceJuego
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
-		this.princesa=new Princesa(100,480,20,40,0);
-		this.soldado=new Soldado(800,480,20,40,0);
-		this.obstaculo=new Obstaculo(700,480,20,60,0);
-		this.nube=new Nube(200,100,100,60,0);
 		
+		this.princesa=new Princesa(100,480,20,40,0);
+		this.soldado=new Soldado[1];
+		this.obstaculo=new Obstaculo[4];
+		
+		this.soldado[0]=new Soldado(800,480,20,40,0);
+		
+		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
+		this.obstaculo[1]=new Obstaculo(700,480,20,60,0);
+		this.obstaculo[2]=new Obstaculo(700,480,20,60,0);
+		this.obstaculo[3]=new Obstaculo(700,480,20,60,0);
+		
+		this.nube=new Nube(200,100,100,60,0);
+
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -51,13 +60,13 @@ public class Juego extends InterfaceJuego
 	 * actualizar el estado interno del juego para simular el paso del tiempo 
 	 * (ver el enunciado del TP para mayor detalle).
 	 */
+	
 	public void tick()
 	{
 		
 		// Procesamiento de un instante de tiempo
 		// ...
-		this.soldado.moverAdelante();
-		this.obstaculo.moverAdelante();
+
 		this.nube.moverAdelante();
 		
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA))
@@ -69,8 +78,7 @@ public class Juego extends InterfaceJuego
 		//if (entorno.estaPresionada(entorno.TECLA_ARRIBA))
 		//	this.princesa.moverArriba(); no me salio pa q salte
 			
-		int contVidas = 3;
-		int Puntaje = 0;
+		
 		
 		entorno.cambiarFont("Arial", 18, Color.white);
 		entorno.escribirTexto("Cantidad de vidas: " + contVidas, 550, 50);
@@ -78,9 +86,9 @@ public class Juego extends InterfaceJuego
 		entorno.escribirTexto("puntaje: " + Puntaje, 550, 25);
 			
 		
+		
 		this.princesa.dibujarse(this.entorno);
-		this.soldado.dibujarse(entorno);
-		this.obstaculo.dibujarse(entorno);
+
 		this.nube.dibujarse(entorno);
 		
 		
