@@ -70,10 +70,17 @@ public class Juego extends InterfaceJuego
 		this.nube.moverAdelante();
 		
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA))
-			this.princesa.moverAtras();
+			for(int i=0;i<obstaculo.length;i++) {
+
+				obstaculo[i].moverAdelante();
 
 		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
 			this.princesa.moverAdelante();
+		
+		//movimiento soldados
+		for(int j=0;j<soldado.length;j++) {
+
+			soldado[j].moverAdelante();
 		
 		//if (entorno.estaPresionada(entorno.TECLA_ARRIBA))
 		//	this.princesa.moverArriba(); no me salio pa q salte
