@@ -23,12 +23,27 @@ public class Soldado {
 	}
 	
 	public void dibujarse(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.RED);
+		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.BLUE);
 	}
 	
-	public void moverAdelante() {
-		this.x -= Math.cos(this.angulo)*2;
-		this.y += Math.sin(this.angulo)*2;
+	public void mover(double angulo) {
+		//con angulo indico el sentido del movimiento con 0 a la izq y 180 a la der
+		
+		this.x += Math.cos(angulo);
+		//this.y += Math.sin(this.angulo)*2;
+		
+		if (this.x > 850) {
+			this.x=0;
+		}
+		if (this.x < -50) {
+			this.x=850;
+		}	
+		
 	}
-}
+	
+		
+	}
+	
+	
+
 

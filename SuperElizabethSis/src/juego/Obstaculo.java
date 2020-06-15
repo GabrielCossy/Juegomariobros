@@ -25,8 +25,8 @@ public class Obstaculo {
 	}
 	
 	public void moverAdelante() {
-		this.x -= Math.cos(this.angulo)*3;
-		this.y += Math.sin(this.angulo)*2;
+		this.x -= Math.cos(this.angulo)*2;
+		//this.y += Math.sin(this.angulo)*2;
 		
 		if (this.x > 850) {
 			this.x=0;
