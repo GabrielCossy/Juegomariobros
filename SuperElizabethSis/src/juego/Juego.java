@@ -79,14 +79,32 @@ public class Juego extends InterfaceJuego
 		
 		
 		//Movimiento "princesa" 
+		
+		if(entorno.estaPresionada(entorno.TECLA_ARRIBA))
+			princesa.subir();
+		if(entorno.estaPresionada(entorno.TECLA_ABAJO))
+			princesa.bajar();
+		
+		
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
 				
 			for(int i=0;i<obstaculo.length;i++) {
 
 				obstaculo[i].moverAdelante();
+				//control de colicion princesa con obstaculos.
+				if(princesa.toca(obstaculo[0]) || princesa.toca(obstaculo[1]) || princesa.toca(obstaculo[2]) || princesa.toca(obstaculo[3]))
+					contVidas--;
+	            	entorno.cambiarFont("ARIAL",18,Color.BLACK);
+	            	entorno.escribirTexto("Perdiste una vida"+contVidas,500,50);
+				
 
 				}
 		}
+		
+		
+		
+		
+		
 		for(int i=0;i<soldado.length;i++) {
 			
 			for (int j=0; j<obstaculo.length; j++) { //control de colicion
@@ -100,7 +118,11 @@ public class Juego extends InterfaceJuego
 		}
 
 		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
-			this.princesa.moverAdelante();
+			
+			for(int i=0;i<obstaculo.length;i++) {
+
+				obstaculo[i].moverAdelante(); //hay que cambiar como el cambio de sentido del soldado.
+			}
 		
 		
 		//if (entorno.estaPresionada(entorno.TECLA_ARRIBA))
@@ -113,18 +135,24 @@ public class Juego extends InterfaceJuego
 		entorno.cambiarFont("Arial", 18, Color.white);
 		entorno.escribirTexto("puntaje: " + puntaje, 550, 25);
 		
-		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("posicion soldado: " + soldado[0].x, 550, 65);
-		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("posicion obs1: " + obstaculo[0].x, 550, 85);
-		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("posicion obs2: " + obstaculo[1].x, 550, 105);
-		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("posicion obs3: " + obstaculo[2].x, 550, 125);
-		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("posicion obs4: " + obstaculo[3].x, 550, 145);
+		//entorno.cambiarFont("Arial", 18, Color.white);
+		//entorno.escribirTexto("posicion soldado: " + soldado[0].x, 550, 65);
+		//entorno.cambiarFont("Arial", 18, Color.white);
+		//entorno.escribirTexto("posicion obs1: " + obstaculo[0].x, 550, 85);
+		//entorno.cambiarFont("Arial", 18, Color.white);
+		//entorno.escribirTexto("posicion obs2: " + obstaculo[1].x, 550, 105);
+		//entorno.cambiarFont("Arial", 18, Color.white);
+		//entorno.escribirTexto("posicion obs3: " + obstaculo[2].x, 550, 125);
+		//entorno.cambiarFont("Arial", 18, Color.white);
+		//entorno.escribirTexto("posicion obs4: " + obstaculo[3].x, 550, 145);
 		
-		
+		if(contVidas<=0) {	//control para indicar partida terminada por falta de vidas
+			
+			entorno.cambiarFont("ARIAL",30,Color.RED);
+			entorno.escribirTexto("Perdiste!!!!"+contVidas,entorno.ancho()/2-200,entorno.alto()/2);
+			
+			princesa.detenerse(); //hay que corregir la inicialización
+		}
 			
 		
 		//dibujos
