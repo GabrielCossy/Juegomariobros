@@ -21,15 +21,29 @@ public class Princesa {
 		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.GREEN);
 	}
 	
-	public void moverAtras() {			
-		x=x+1;			
-	}	
-	public void moverAdelante() {			
-		x=x-1;	
+	public void subir() {
+		this.y-=0.5;
+		this.y=300;
+		
+	
 	}
-	//public void moverArriba() {	no me salio pa que salte	
-	//	y=y-10;		
-	//}		
+	public void bajar() {
+		this.y+=0.5;
+		this.y=480;
+	}
+	public boolean toca(Obstaculo obstaculo) {
+		return x > obstaculo.x - obstaculo.ancho/2 && 
+				x < obstaculo.x + obstaculo.ancho/2 &&
+				y > obstaculo.y - obstaculo.alto/2 && 
+				y < obstaculo.y + obstaculo.alto/2 ;
+	}
+	public int detenerse() {
+		this.x=0;
+		this.y=0;
+		return 0;
+				
+				
+	}
 	
 	}
 	
