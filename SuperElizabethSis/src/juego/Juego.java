@@ -7,6 +7,9 @@ import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
 
+//import java.math;
+
+
 public class Juego extends InterfaceJuego
 {
 	Princesa princesa;	
@@ -21,7 +24,8 @@ public class Juego extends InterfaceJuego
 	private Nube nube;
 	int contVidas = 3;
 	int puntaje = 0;
-	
+	double pi = Math.PI;
+	int signo = -1;
 	
 	public Object x;
 	
@@ -45,7 +49,7 @@ public class Juego extends InterfaceJuego
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
 		this.obstaculo[1]=new Obstaculo(800,480,20,60,0);
 		this.obstaculo[2]=new Obstaculo(950,480,20,60,0);
-		this.obstaculo[3]=new Obstaculo(1000,480,20,60,0);
+		this.obstaculo[3]=new Obstaculo(1050,480,20,60,0);
 		
 		this.nube=new Nube(200,100,100,60,0);
 
@@ -69,20 +73,35 @@ public class Juego extends InterfaceJuego
 
 		this.nube.moverAdelante();
 		
-		if (entorno.estaPresionada(entorno.TECLA_DERECHA))
+		
+		//movimiento soldados
+		
+		
+		
+		//Movimiento "princesa" 
+		if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
+				
 			for(int i=0;i<obstaculo.length;i++) {
 
 				obstaculo[i].moverAdelante();
+
+				}
+		}
+		for(int i=0;i<soldado.length;i++) {
+			
+			for (int j=0; j<obstaculo.length; j++) { //control de colicion
+				if (obstaculo[j].x==soldado[i].x) 
+					pi = pi + Math.PI*signo;
+					signo = signo*-1;
+											
 			}
+			
+				soldado[i].mover(pi); //se le pasa el angulo a mover para indicar el sentido de mov
+		}
 
 		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
 			this.princesa.moverAdelante();
 		
-		//movimiento soldados
-		for(int i=0;i<soldado.length;i++) {
-
-			soldado[i].moverAdelante();
-		}
 		
 		//if (entorno.estaPresionada(entorno.TECLA_ARRIBA))
 		//	this.princesa.moverArriba(); no me salio pa q salte
@@ -93,6 +112,19 @@ public class Juego extends InterfaceJuego
 		entorno.escribirTexto("Cantidad de vidas: " + contVidas, 550, 50);
 		entorno.cambiarFont("Arial", 18, Color.white);
 		entorno.escribirTexto("puntaje: " + puntaje, 550, 25);
+		
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("posicion soldado: " + soldado[0].x, 550, 65);
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("posicion obs1: " + obstaculo[0].x, 550, 85);
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("posicion obs2: " + obstaculo[1].x, 550, 105);
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("posicion obs3: " + obstaculo[2].x, 550, 125);
+		entorno.cambiarFont("Arial", 18, Color.white);
+		entorno.escribirTexto("posicion obs4: " + obstaculo[3].x, 550, 145);
+		
+		
 			
 		
 		//dibujos
@@ -114,8 +146,10 @@ public class Juego extends InterfaceJuego
 
 	private void obstaculo(Entorno entorno2) {
 		// TODO Apéndice de método generado automáticamente
-		
+				
 	}
+	
+	
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
