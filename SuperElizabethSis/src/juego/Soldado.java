@@ -1,8 +1,9 @@
 package juego;
 
 import java.awt.Color;
-
+import java.awt.Image;
 import entorno.Entorno;
+import entorno.Herramientas;
 
 
 
@@ -12,7 +13,7 @@ public class Soldado {
 	double ancho;
 	double alto;
 	double angulo;
-	
+	Image img;
 	
 	Soldado(double x,double y,double ancho,double alto,double angulo){
 	    this.x=x;
@@ -20,10 +21,11 @@ public class Soldado {
 		this.ancho=ancho;
 		this.alto=alto;
 		this.angulo=angulo;
+		this.img =  Herramientas.cargarImagen("soldado.png");
 	}
 	
 	public void dibujarse(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.BLUE);
+		entorno.dibujarImagen(img, x, y, 0);
 	}
 	
 	public void mover(double angulo) {

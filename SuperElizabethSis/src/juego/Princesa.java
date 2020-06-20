@@ -1,6 +1,9 @@
 package juego;
 import java.awt.Color;
+import java.awt.Image;
+
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Princesa {
 	double x;
@@ -8,6 +11,7 @@ public class Princesa {
 	double ancho;
 	double alto;
 	double angulo;
+	Image img;
 	
 	
 	Princesa(double x,double y,double ancho,double alto,double angulo){
@@ -16,17 +20,25 @@ public class Princesa {
 		this.ancho=ancho;
 		this.alto=alto;
 		this.angulo=angulo;
+		this.img =  Herramientas.cargarImagen("princesa_cam.png");
 	}
 	public void dibujarse(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.GREEN);
+		entorno.dibujarImagen(img, x, y, 0);
 	}
 	
 	public void subir() {
 		this.y-=0.5;
 		this.y=300;
-		
+	}	
+	public void mover(int dx) {
+			this.x = this.x + dx;
+		}
+
+	public void subir(int dy) {
+			this.y = this.y + dy;
+		}
+
 	
-	}
 	public void bajar() {
 		this.y+=0.5;
 		this.y=480;
@@ -44,6 +56,32 @@ public class Princesa {
 				
 				
 	}
+	private final int ALTURA_MAX_SALTO = 150;
+	private boolean saltandoArriba = true;
+	private int alturaSalto = 0;
+	public boolean saltando = false;
+
+	public void princesaSaltar(Entorno entorno) {
+		if (!saltando)
+			saltando = true;
+
+		if (alturaSalto < ALTURA_MAX_SALTO && saltandoArriba) {
+			this.subir(-3);
+			alturaSalto += 3;
+			if (alturaSalto >= ALTURA_MAX_SALTO)
+				saltandoArriba = false;
+		}
+		if (saltando && !saltandoArriba) {
+			this.subir(3);
+			alturaSalto -= 3;
+			if (alturaSalto <= 0) {
+				saltandoArriba = true;
+				saltando = false;
+				alturaSalto = 0;
+			}
+		}
+	}
+
 	
 	}
 	

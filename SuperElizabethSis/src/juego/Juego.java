@@ -3,6 +3,8 @@ package juego;
 
 import java.awt.Color;
 import java.awt.Image;
+
+
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
@@ -22,6 +24,7 @@ public class Juego extends InterfaceJuego
 	private Obstaculo[] obstaculo;
 	private Soldado[] soldado;
 	private Nube nube;
+	private Image fondo;
 	int contVidas = 3;
 	int puntaje = 0;
 	double pi = Math.PI;
@@ -36,7 +39,7 @@ public class Juego extends InterfaceJuego
 	{
 		// Inicializa el objeto entorno
 		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo ... - v1", 800, 600);
-		
+		this.fondo = Herramientas.cargarImagen("Cielo.png");
 		// Inicializar lo que haga falta para el juego
 		// ...
 		
@@ -52,7 +55,7 @@ public class Juego extends InterfaceJuego
 		this.obstaculo[3]=new Obstaculo(1050,480,20,60,0);
 		
 		this.nube=new Nube(200,100,100,60,0);
-
+		
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -70,21 +73,16 @@ public class Juego extends InterfaceJuego
 		
 		// Procesamiento de un instante de tiempo
 		// ...
-
 		this.nube.moverAdelante();
-		
-		
+				
 		//movimiento soldados
 		
-		
-		
+				
 		//Movimiento "princesa" 
-		
-		if(entorno.estaPresionada(entorno.TECLA_ARRIBA))
-			princesa.subir();
-		if(entorno.estaPresionada(entorno.TECLA_ABAJO))
-			princesa.bajar();
-		
+		if (entorno.sePresiono(entorno.TECLA_ESPACIO) || princesa.saltando) 
+			princesa.princesaSaltar(entorno);
+
+			
 		
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
 				
@@ -92,7 +90,7 @@ public class Juego extends InterfaceJuego
 
 				obstaculo[i].moverAdelante();
 				//control de colicion princesa con obstaculos.
-				if(princesa.toca(obstaculo[0]) || princesa.toca(obstaculo[1]) || princesa.toca(obstaculo[2]) || princesa.toca(obstaculo[3]))
+				if(princesa.toca(obstaculo[0]) || princesa.toca(obstaculo[1])  || princesa.toca(obstaculo[3]))
 					contVidas--;
 	            	entorno.cambiarFont("ARIAL",18,Color.BLACK);
 	            	entorno.escribirTexto("Perdiste una vida"+contVidas,500,50);
@@ -103,7 +101,7 @@ public class Juego extends InterfaceJuego
 		
 		
 		
-		
+		this.entorno.dibujarImagen(this.fondo,400,300, 0);
 		
 		for(int i=0;i<soldado.length;i++) {
 			

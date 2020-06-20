@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Obstaculo {
 	double x;
@@ -11,17 +12,19 @@ public class Obstaculo {
 	double ancho;
 	double alto;
 	double angulo;
-	
+	Image img;
 	Obstaculo(double x,double y,double ancho,double alto,double angulo){
 	    this.x=x;
 		this.y=y;
 		this.ancho=ancho;
 		this.alto=alto;
 		this.angulo=angulo;
+		this.img =  Herramientas.cargarImagen("bloque.png");
+		
 	}
 	
 	public void dibujarse(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y,ancho,alto,angulo,Color.RED);
+		entorno.dibujarImagen(img, x, y, 0);
 	}
 	
 	public void moverAdelante() {
