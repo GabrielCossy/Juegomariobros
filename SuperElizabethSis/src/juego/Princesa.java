@@ -4,6 +4,11 @@ import java.awt.Image;
 
 import entorno.Entorno;
 import entorno.Herramientas;
+import jdk.internal.org.jline.reader.impl.DefaultParser.ArgumentList;
+
+
+
+
 
 public class Princesa {
 	double x;
@@ -12,6 +17,7 @@ public class Princesa {
 	double alto;
 	double angulo;
 	Image img;
+		
 	
 	
 	Princesa(double x,double y,double ancho,double alto,double angulo){
@@ -48,7 +54,10 @@ public class Princesa {
 				x < obstaculo.x + obstaculo.ancho/2 &&
 				y > obstaculo.y - obstaculo.alto/2 && 
 				y < obstaculo.y + obstaculo.alto/2 ;
+				
 	}
+	
+	
 	public int detenerse() {
 		this.x=0;
 		this.y=0;
@@ -56,14 +65,20 @@ public class Princesa {
 				
 				
 	}
+	
+	Fuego dispararFuego() {
+		return new Fuego(this.x,this.y);
+	}
 	private final int ALTURA_MAX_SALTO = 150;
 	private boolean saltandoArriba = true;
 	private int alturaSalto = 0;
 	public boolean saltando = false;
+	
 
 	public void princesaSaltar(Entorno entorno) {
 		if (!saltando)
 			saltando = true;
+		this.img =  Herramientas.cargarImagen("princesa_cam.png");
 
 		if (alturaSalto < ALTURA_MAX_SALTO && saltandoArriba) {
 			this.subir(-3);
@@ -72,9 +87,11 @@ public class Princesa {
 				saltandoArriba = false;
 		}
 		if (saltando && !saltandoArriba) {
+			this.img =  Herramientas.cargarImagen("princesa_sal.png");
 			this.subir(3);
 			alturaSalto -= 3;
 			if (alturaSalto <= 0) {
+				this.img =  Herramientas.cargarImagen("princesa_cam.png");
 				saltandoArriba = true;
 				saltando = false;
 				alturaSalto = 0;
