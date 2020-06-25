@@ -15,7 +15,7 @@ public class Soldado {
 	double angulo;
 	boolean contacto;
 	Image img;
-	
+	private Fuego[] fuegos;
 	
 	double pi = Math.PI;
 	int signo = -1;
@@ -95,11 +95,27 @@ public class Soldado {
 		}
 	
 	}	
+	
+	public boolean quemon(Soldado soldado,Soldado soldado1) {
+		if(( soldado.x ==soldado1.x-soldado1.ancho/2) ||( soldado.x == soldado1.x+soldado1.ancho/2) || (soldado.y == soldado1.y-soldado1.alto/2)|| (soldado.y == soldado1.y+soldado1.alto/2)) {
+			pi = pi + Math.PI*signo;
+			signo = signo*-1;
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+	
+	}
+
+	
+	
 	public boolean quema(Soldado soldado,Fuego fuegos) {
 		if(( soldado.x ==fuegos.x-fuegos.ancho/2) ||( soldado.x == fuegos.x+fuegos.ancho/2) || (soldado.y == fuegos.y-fuegos.alto/2)|| (soldado.y == fuegos.y+fuegos.alto/2)) {
 			pi = pi + Math.PI*signo;
 			signo = signo*-1;
-			
+			soldado.x=5000;
 			return true;
 		}
 		else {
@@ -129,9 +145,16 @@ public class Soldado {
 		this.x -= Math.cos(this.angulo)*1;
 		this.y += Math.sin(this.angulo)*2;
 		
+			
+		
 		
 		
 	}
+	public void pos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	
 	}
 	

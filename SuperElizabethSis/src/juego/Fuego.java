@@ -33,6 +33,8 @@ public class Fuego {
 			this.x=this.x+5;
 	
 	}
+	
+	
 	public boolean toca(Soldado Soldado) {
 			
 
@@ -50,6 +52,8 @@ public class Fuego {
 	}
 	public boolean Quema(Soldado soldado) {
 		if(( x > soldado.x-soldado.ancho/2) &&( x < soldado.x+soldado.ancho/2) && (y > soldado.y-soldado.alto/2)&& (y < soldado.y+soldado.alto/2)) {
+			
+			
 			return true;
 		}
 		else {
@@ -68,6 +72,13 @@ public class Fuego {
 		
 		this.contacto = contacto;	
 	}	
+	
+	
+	public void pos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	
 }
 	

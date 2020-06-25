@@ -83,14 +83,16 @@ public boolean toca(Fuego Fuego) {
 }
 
 
-	
-	
-	public void moverAdelante() {
-		
-		this.x -= Math.cos(this.angulo)*1;
-		this.y += Math.sin(this.angulo)*2;
-		
-		
-		
+public void moverAdelante() {
+	if(x>0) {
+		x-=1.5;
 	}
+	else {
+		x=780;
+		this.contacto=false;
+	
+	}
+	
+}
+
 }

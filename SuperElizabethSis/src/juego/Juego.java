@@ -175,11 +175,12 @@ public class Juego extends InterfaceJuego
 		
 		if (Vidas==0) {
 			this.entorno.dibujarImagen(this.img,400,300, 0);
-			princesa.delete();
+			
+			fuego.delete();
+			
 			
 		}	
 		
-
 		
 		
 		
@@ -206,24 +207,44 @@ public class Juego extends InterfaceJuego
 
 	
 		
-		
-
-		for(int i=0;i<obstaculo.length;i++) {
+			for(int i=0;i<obstaculo.length;i++) {
+				
+				this.obstaculo[i].dibujarse(this.entorno);
+				
 			
-			this.obstaculo[i].dibujarse(this.entorno);
-		}
+			}
+			
+		
+		
+		
 		for(int i=0;i<soldado.length;i++) {
-			this.soldado[i].dibujarse(this.entorno);
-		
+			
+			
+			soldado[i].dibujarse(entorno);
+			
+				
 			
 		}
-		
-		
-		
-		
-		
+		 
 
-	}
+		for(int i=0;i<soldado.length;i++) {
+			
+			
+			
+			for(int h=0;h<fuegos.length;h++) {
+				
+				
+			if(fuegos[h].Quema(soldado[i])){	 
+				soldado[i].delete();
+				fuegos[h].delete();
+				
+					}
+			}
+		}
+
+		
+			}
+		
 	
 
 	private void obstaculo(Entorno entorno2) {
