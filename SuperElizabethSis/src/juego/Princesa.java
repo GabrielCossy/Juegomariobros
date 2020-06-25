@@ -1,14 +1,8 @@
 package juego;
-import java.awt.Color;
-import java.awt.Image;
 
+import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
-import jdk.internal.org.jline.reader.impl.DefaultParser.ArgumentList;
-
-
-
-
 
 public class Princesa {
 	double x;
@@ -16,6 +10,7 @@ public class Princesa {
 	double ancho;
 	double alto;
 	double angulo;
+	int Vidas;
 	Image img;
 		
 	
@@ -36,9 +31,8 @@ public class Princesa {
 		this.y-=0.5;
 		this.y=300;
 	}	
-	public void mover(int dx) {
-			this.x = this.x + dx;
-		}
+
+		
 
 	public void subir(int dy) {
 			this.y = this.y + dy;
@@ -50,21 +44,33 @@ public class Princesa {
 		this.y=480;
 	}
 	public boolean toca(Obstaculo obstaculo) {
+	
 		return x > obstaculo.x - obstaculo.ancho/2 && 
 				x < obstaculo.x + obstaculo.ancho/2 &&
 				y > obstaculo.y - obstaculo.alto/2 && 
 				y < obstaculo.y + obstaculo.alto/2 ;
 				
 	}
+	public boolean toca(Soldado Soldado) {
+		
+		return x > Soldado.x - Soldado.ancho/2 && 
+				x < Soldado.x + Soldado.ancho/2 &&
+				y > Soldado.y - Soldado.alto/2 && 
+				y < Soldado.y + Soldado.alto/2 ;
+				
+	}
+	
 	
 	
 	public int detenerse() {
-		this.x=0;
-		this.y=0;
+		this.x=100;
+		this.y=480;
 		return 0;
 				
 				
 	}
+	
+	
 	
 	Fuego dispararFuego() {
 		return new Fuego(this.x,this.y);
@@ -74,11 +80,37 @@ public class Princesa {
 	private int alturaSalto = 0;
 	public boolean saltando = false;
 	
-
+	public void moverAdelante() {
+			
+			this.x += Math.cos(this.angulo)*2;
+			this.y += Math.sin(this.angulo)*2;
+			
+			if (this.x > 300) {
+				this.x=300;
+			}
+				
+			
+		}
+	public void moverAtras() {
+			
+			this.x -= Math.cos(this.angulo)*2;
+			this.y += Math.sin(this.angulo)*2;
+			
+			if (this.x > 850) {
+				this.x=0;
+			}
+			if (this.x < 0) {
+				this.x=0;
+			}	
+			
+		}
+	
+	public void delete() {
+		this.y=this.y+5000;
+	}
 	public void princesaSaltar(Entorno entorno) {
 		if (!saltando)
 			saltando = true;
-		this.img =  Herramientas.cargarImagen("princesa_cam.png");
 
 		if (alturaSalto < ALTURA_MAX_SALTO && saltandoArriba) {
 			this.subir(-3);
@@ -98,7 +130,6 @@ public class Princesa {
 			}
 		}
 	}
-
 	
 	}
 	
