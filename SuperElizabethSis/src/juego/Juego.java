@@ -112,14 +112,22 @@ public class Juego extends InterfaceJuego
 			if(this.fuegos[f]!=null) {
 				this.fuegos[f].dibujarse(entorno);
 				this.fuegos[f].lanzar();
+				for(int i=0;i<soldado.length;i++) {
+				if(fuegos[f].Quema(soldado[i])){	 
+					soldado[i].delete();
+					fuegos[f].delete();
+					
+						}
+				
 			}
-		}
+		}}
 		int j=0;
 		while(j<this.fuegos.length && this.fuegos[j]!=null) {
 			j++;
 		}
 		if(this.entorno.sePresiono(this.entorno.TECLA_ESPACIO)) {
 			this.fuegos[j]=princesa.dispararFuego();
+			
 		}
 		//fondo
 		
@@ -227,20 +235,15 @@ public class Juego extends InterfaceJuego
 		}
 		 
 
-		for(int i=0;i<soldado.length;i++) {
+		
 			
 			
 			
-			for(int h=0;h<fuegos.length;h++) {
+			
 				
 				
-			if(fuegos[h].Quema(soldado[i])){	 
-				soldado[i].delete();
-				fuegos[h].delete();
-				
-					}
-			}
-		}
+			
+		
 
 		
 			}
