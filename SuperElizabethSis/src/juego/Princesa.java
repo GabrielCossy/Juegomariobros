@@ -62,6 +62,17 @@ public class Princesa {
 	
 	
 	
+	public boolean toca(Coin Coin) {
+			
+			return x > Coin.x - Coin.ancho/2 && 
+					x < Coin.x + Coin.ancho/2 &&
+					y > Coin.y - Coin.alto/2 && 
+					y < Coin.y + Coin.alto/2 ;
+					
+		}
+	
+	
+	
 	public int detenerse() {
 		this.x=100;
 		this.y=480;

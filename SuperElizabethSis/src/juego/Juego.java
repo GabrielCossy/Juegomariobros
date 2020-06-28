@@ -18,6 +18,7 @@ public class Juego extends InterfaceJuego
 	private Obstaculo[] obstaculo;
 	private Soldado[] soldado;
 	private Nube[] nube;
+	private Coin[] coin;
 	private Fuego[] fuegos;
 	private Image fondo;
 	
@@ -31,7 +32,11 @@ public class Juego extends InterfaceJuego
 	double pi = Math.PI;
 	int signo = -1;	
 	public Object x;
-	private Image img;	
+	private Image img;
+	int cont=350;
+	
+	
+	
 	// Variables y métodos propios de cada grupo
 	// ...	
 	Soldado[] solant;
@@ -48,24 +53,33 @@ public class Juego extends InterfaceJuego
 		this.soldado=new Soldado[3];
 		this.obstaculo=new Obstaculo[4];
 		this.nube=new Nube[3];
+		this.coin=new Coin[2];
 		
 		
-		
+		//soldados iniciales
 		
 		this.soldado[0]=new Soldado(850,490,20,40,0);
 		this.soldado[1]=new Soldado(750,480,20,60,0);
-		
 		this.soldado[2]=new Soldado(900,480,20,60,0);
+		
+		
+		//obstaculos iniciales
 		
 		
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
 		this.obstaculo[1]=new Obstaculo(900,480,20,60,0);
 		this.obstaculo[2]=new Obstaculo(1200,480,20,60,0);
 		this.obstaculo[3]=new Obstaculo(1050,480,20,60,0);
-		//this.fondo=new Fondo(200,300,100,60,0);
-		this.nube[0]=new Nube(200,100,100,60,0);
-		this.nube[1]=new Nube(200,200,100,60,0);
+		
+		//elementos
+		
+		this.nube[0]=new Nube(900,50,100,60,0);
+		this.nube[1]=new Nube(600,200,100,60,0);
 		this.nube[2]=new Nube(300,100,100,60,0);
+		
+		this.coin[0]=new Coin(800,350,100,60,0);
+		this.coin[1]=new Coin(500,400,100,60,0);
+		
 		
 		
 		
@@ -89,6 +103,10 @@ public class Juego extends InterfaceJuego
 		this.nube[0].moverAdelante();
 		this.nube[1].moverAdelante();
 		this.nube[2].moverAdelante();
+		
+		this.coin[0].moverAdelante();
+		this.coin[1].moverAdelante();
+		
 		this.obstaculo[0].moverAdelante();
 		this.obstaculo[1].moverAdelante();
 		this.obstaculo[2].moverAdelante();
@@ -203,15 +221,46 @@ public class Juego extends InterfaceJuego
 			
 			
 		
-			if(princesa.toca(soldado[i]) && !soldado[i].contacto && Vidas!=0){	 
-				soldado[i].setContacto(true);
+		if(princesa.toca(soldado[i]) && !soldado[i].contacto && Vidas!=0){	 
+			soldado[i].setContacto(true);
+			
+			soldado[i].delete();
+			
+			
+				Vidas--;
+				}
+		}
+		
+		for(int i=0;i<coin.length;i++) {
 				
-				soldado[i].delete();
 				
 				
-					Vidas--;
-					}
-			}
+				if(princesa.toca(coin[i]) ){	 
+						
+					
+					this.coin[i]=new Coin(850,cont,100,60,0);
+					cont=cont+50;
+					puntaje=puntaje+5;
+				}
+				if (cont==450) {
+					cont=350;
+				}
+	
+					
+		}
+			
+						
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		if (Vidas==0) {
 			this.entorno.dibujarImagen(this.img,400,300, 0);
@@ -239,6 +288,10 @@ public class Juego extends InterfaceJuego
 		this.nube[1].dibujarse(entorno);
 		this.nube[2].dibujarse(entorno);
 		
+		
+		this.coin[0].dibujarse(entorno);
+		this.coin[1].dibujarse(entorno);
+		
 		this.entorno.cambiarFont("Arial", 18, Color.white);
 		this.entorno.escribirTexto("Cantidad de vidas: " + Vidas, 550, 50);
 		this.entorno.cambiarFont("Arial", 18, Color.white);
@@ -247,12 +300,12 @@ public class Juego extends InterfaceJuego
 
 	
 		
-			for(int i=0;i<obstaculo.length;i++) {
-				
-				this.obstaculo[i].dibujarse(this.entorno);
-				
+		for(int i=0;i<obstaculo.length;i++) {
 			
-			}
+			this.obstaculo[i].dibujarse(this.entorno);
+			
+		
+		}
 			
 		
 		
