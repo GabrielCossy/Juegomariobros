@@ -51,9 +51,10 @@ public class Fuego {
 			return false;
 	}
 	public boolean Quema(Soldado soldado) {
-		if(( x > soldado.x-soldado.ancho/2) &&( x < soldado.x+soldado.ancho/2) && (y > soldado.y-soldado.alto/2)&& (y < soldado.y+soldado.alto/2)) {
+		if(( x > soldado.x-soldado.ancho/2) &&( x < soldado.x+soldado.ancho/2) && (y > soldado.y-soldado.alto/2)&& (y < soldado.y+soldado.alto/2) && (x<820))   {
 			
 			
+
 			return true;
 		}
 		else {

@@ -142,10 +142,13 @@ public class Soldado {
 	}
 	public void moverAdelante() {
 		
-		this.x -= Math.cos(this.angulo)*1;
+		this.x -= Math.cos(this.angulo)*2;
 		this.y += Math.sin(this.angulo)*2;
 		
-			
+		
+		if (this.x < -50) {
+			this.x=1000;
+		}	
 		
 		
 		

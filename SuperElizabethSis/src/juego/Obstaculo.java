@@ -44,6 +44,10 @@ public class Obstaculo {
 		//if (this.x > 850) {
 			//this.x=0;
 		//}
+			
+		if (this.x > 850) {
+			this.x=0;
+		}
 		if (this.x < -50) {
 			this.x=850;
 		}	

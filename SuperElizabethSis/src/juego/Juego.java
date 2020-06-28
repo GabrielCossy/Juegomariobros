@@ -24,16 +24,17 @@ public class Juego extends InterfaceJuego
 	boolean contacto;
 	
 	private Fuego fuego;
-	
+	int posc=850;
 	int Vidas = 3;
 	int puntaje = 0;
+	int posc1 =0;
 	double pi = Math.PI;
 	int signo = -1;	
 	public Object x;
 	private Image img;	
 	// Variables y métodos propios de cada grupo
 	// ...	
-	
+	Soldado[] solant;
 	Juego()
 	{
 		// Inicializa el objeto entorno
@@ -44,20 +45,22 @@ public class Juego extends InterfaceJuego
 		// ...
 		this.fuegos=new Fuego[100];
 		this.princesa=new Princesa(100,490,20,40,0);
-		this.soldado=new Soldado[4];
+		this.soldado=new Soldado[3];
 		this.obstaculo=new Obstaculo[4];
 		this.nube=new Nube[3];
 		
 		
 		
+		
 		this.soldado[0]=new Soldado(850,490,20,40,0);
 		this.soldado[1]=new Soldado(750,480,20,60,0);
-		this.soldado[2]=new Soldado(850,480,20,60,0);
-		this.soldado[3]=new Soldado(900,480,20,60,0);
-		this.obstaculo[3]=new Obstaculo(1050,480,20,60,0);
+		
+		this.soldado[2]=new Soldado(900,480,20,60,0);
+		
+		
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
-		this.obstaculo[1]=new Obstaculo(800,480,20,60,0);
-		this.obstaculo[2]=new Obstaculo(950,480,20,60,0);
+		this.obstaculo[1]=new Obstaculo(900,480,20,60,0);
+		this.obstaculo[2]=new Obstaculo(1200,480,20,60,0);
 		this.obstaculo[3]=new Obstaculo(1050,480,20,60,0);
 		//this.fondo=new Fondo(200,300,100,60,0);
 		this.nube[0]=new Nube(200,100,100,60,0);
@@ -90,22 +93,29 @@ public class Juego extends InterfaceJuego
 		this.obstaculo[1].moverAdelante();
 		this.obstaculo[2].moverAdelante();
 		this.obstaculo[3].moverAdelante();
-		this.soldado[0].moverAdelante();
+		/*this.soldado[0].moverAdelante();
 		this.soldado[1].moverAdelante();
 		this.soldado[2].moverAdelante();
 		this.soldado[3].moverAdelante();
-															//movimiento soldados
+		*/
+		
+		
+		
+		
+		
+		
+		//movimiento soldados
 		for(int i=0;i<soldado.length;i++) {
 					for (int j=0; j<obstaculo.length; j++) { //control de colicion
 				if (obstaculo[j].x==soldado[i].x) 
 					pi = pi + Math.PI*signo;
 					signo = signo*-1;
 			}
-			soldado[i].mover(); //se le pasa el angulo a mover para indicar el sentido de mov
+			soldado[i].moverAdelante(); //se le pasa el angulo a mover para indicar el sentido de mov
 }
 			
 		//Movimiento "princesa" 
-		if (entorno.sePresiono(entorno.TECLA_SHIFT) || princesa.saltando)
+		if (entorno.sePresiono(entorno.TECLA_ARRIBA) || princesa.saltando)
 			princesa.princesaSaltar(entorno);
 		this.entorno.dibujarImagen(this.fondo,400,300, 0);
 		for(int f=0;f<this.fuegos.length;f++) {
@@ -113,14 +123,33 @@ public class Juego extends InterfaceJuego
 				this.fuegos[f].dibujarse(entorno);
 				this.fuegos[f].lanzar();
 				for(int i=0;i<soldado.length;i++) {
-				if(fuegos[f].Quema(soldado[i])){	 
-					soldado[i].delete();
+				if(fuegos[f].Quema(soldado[i])){
+					
+					posc1=posc;
+					this.soldado[i]=new Soldado(posc,480,20,60,0);
+					
+					if (posc>1100) {
+						 posc=1000 ;
+					 }
+					
+					
+					if (posc1==posc){
+						 posc=posc+50;
+					 }
+					 
+						
+							
+					puntaje=puntaje+5;					
 					fuegos[f].delete();
 					
 						}
 				
 			}
 		}}
+		
+		
+		
+		
 		int j=0;
 		while(j<this.fuegos.length && this.fuegos[j]!=null) {
 			j++;
@@ -155,7 +184,7 @@ public class Juego extends InterfaceJuego
 		
 				if(princesa.toca(obstaculo[i]) && !obstaculo[i].contacto && Vidas!=0){	 
 					obstaculo[i].setContacto(true);
-					obstaculo[i].delete();
+					this.obstaculo[i]=new Obstaculo(850,480,20,60,0);
 					Vidas--;
 					}
 			
@@ -176,7 +205,10 @@ public class Juego extends InterfaceJuego
 		
 			if(princesa.toca(soldado[i]) && !soldado[i].contacto && Vidas!=0){	 
 				soldado[i].setContacto(true);
+				
 				soldado[i].delete();
+				
+				
 					Vidas--;
 					}
 			}
@@ -234,17 +266,6 @@ public class Juego extends InterfaceJuego
 			
 		}
 		 
-
-		
-			
-			
-			
-			
-				
-				
-			
-		
-
 		
 			}
 		
