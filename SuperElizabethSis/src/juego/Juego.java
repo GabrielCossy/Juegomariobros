@@ -3,19 +3,16 @@ package juego;
 
 import java.awt.Color;
 import java.awt.Image;
-
-
-
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
 
 
-public class Juego<Finalcupa> extends InterfaceJuego
+public class Juego extends InterfaceJuego
 {
 	Princesa princesa;	
 	public static final String Princesa = null;
-	private static final String Puntaje = null;
+	
 	// El objeto Entorno que controla el tiempo y otros
 	private Entorno entorno;
 	private Obstaculo[] obstaculo;
@@ -24,10 +21,7 @@ public class Juego<Finalcupa> extends InterfaceJuego
 	private Coin[] coin;
 	private Fuego[] fuegos;
 	private Image fondo;
-	private Finalcupa finalcupa;
-	
-	boolean contacto;
-	
+	boolean contacto;	
 	private Fuego fuego;
 	int posc=850;
 	int Vidas = 3;
@@ -38,6 +32,8 @@ public class Juego<Finalcupa> extends InterfaceJuego
 	public Object x;
 	private Image img;
 	private Image noche;
+	private Image ganaste;
+	//private Clip salta; no funciono audio de sonido
 	int cont=350;
 	int poscx=600;
 	
@@ -54,10 +50,11 @@ public class Juego<Finalcupa> extends InterfaceJuego
 		
 		// Inicializa el objeto entorno
 		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo ... - v1", 800, 600);	
-		this.fondo = Herramientas.cargarImagen("Cielo.png");
-		this.img = Herramientas.cargarImagen("fin.png");
-		this.noche = Herramientas.cargarImagen("CieloNoche.png");
-		
+		this.fondo = Herramientas.cargarImagen("imagenes/Cielo.png");
+		this.img = Herramientas.cargarImagen("imagenes/fin.png");
+		this.noche = Herramientas.cargarImagen("imagenes/CieloNoche.png");
+		this.ganaste = Herramientas.cargarImagen("imagenes/ganaste1.png");
+		//this.salta = Herramientas.cargarSonido("jump.wav"); sonido fallido de salto
 		
 
 		
@@ -79,19 +76,15 @@ public class Juego<Finalcupa> extends InterfaceJuego
 			poscx=poscx+150;
 			
 			}
-		
-		
-		
-		
+			
 		//obstaculos iniciales
-		
-		
-		
 		
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
 		this.obstaculo[1]=new Obstaculo(900,480,20,60,0);
 		this.obstaculo[2]=new Obstaculo(1200,480,20,60,0);
 		
+		this.coin[0]=new Coin(800,350,100,60,0);
+		this.coin[1]=new Coin(500,400,100,60,0);
 		
 		//elementos
 		
@@ -99,31 +92,17 @@ public class Juego<Finalcupa> extends InterfaceJuego
 		this.nube[1]=new Nube(600,200,100,60,0);
 		this.nube[2]=new Nube(300,100,100,60,0);
 		
-		this.coin[0]=new Coin(800,350,100,60,0);
-		this.coin[1]=new Coin(500,400,100,60,0);
-		
-		
-		
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
 	
 	}
 
-	/**
-	 * Durante el juego, el método tick() será ejecutado en cada instante y 
-	 * por lo tanto es el método más importante de esta clase. Aquí se debe 
-	 * actualizar el estado interno del juego para simular el paso del tiempo 
-	 * (ver el enunciado del TP para mayor detalle).
-	 */
-	
+		
 	public void tick()
 	{
 		//fondo
 		this.entorno.dibujarImagen(this.fondo,400,300, 0);
-		
-		
-		
 		
 		//Movimiento "princesa" 
 		
@@ -142,9 +121,6 @@ public class Juego<Finalcupa> extends InterfaceJuego
 		
 		//Colision
 		
-		
-		
-		
 		for(int i=0;i<obstaculo.length;i++) {
 			if(princesa.toca(obstaculo[i]) && !obstaculo[i].contacto && Vidas!=0){	 
 					obstaculo[i].setContacto(true);
@@ -155,7 +131,7 @@ public class Juego<Finalcupa> extends InterfaceJuego
 		for(int i=0;i<soldado.length;i++) {
 		if(princesa.toca(soldado[i]) && !soldado[i].contacto && Vidas!=0){	 
 			soldado[i].setContacto(true);
-			this.soldado[i]=new Soldado(850,480,20,60,0);
+			this.soldado[i]=new Soldado(850,490,20,60,0);
 			
 			Vidas--;
 				}
@@ -178,7 +154,7 @@ public class Juego<Finalcupa> extends InterfaceJuego
 			fuego.delete();
 			
 		}	
-		if (puntaje>=70) {
+		if (puntaje>=90 && puntaje<200) {
 			for(int i=0;i<soldado.length;i++) {
 				this.entorno.dibujarImagen(this.noche,400,300, 0);
 				
@@ -188,9 +164,17 @@ public class Juego<Finalcupa> extends InterfaceJuego
 				
 				}
 			}
-		
-		
-		
+			
+		if (puntaje>=200) {
+			for(int i=0;i<soldado.length;i++) {
+				this.entorno.dibujarImagen(this.ganaste,400,300, 0);
+				this.entorno.cambiarFont("Arial", 30, Color.white);
+				this.entorno.escribirTexto("Puntaje: " + puntaje, 300,550);
+				fuego.delete();
+
+				
+				}
+			}
 		//dibujos
 		for(int f=0;f<this.fuegos.length;f++) {
 			if(this.fuegos[f]!=null) {
@@ -256,16 +240,15 @@ public class Juego<Finalcupa> extends InterfaceJuego
 		if(this.entorno.sePresiono(this.entorno.TECLA_ESPACIO)) {
 			this.fuegos[j]=princesa.dispararFuego();
 		}
+		
 		}
 	
 		
 	private void obstaculo(Entorno entorno2) {
 		// TODO Apéndice de método generado automáticamente
-				
+			
 	}
 	
-	
-
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{

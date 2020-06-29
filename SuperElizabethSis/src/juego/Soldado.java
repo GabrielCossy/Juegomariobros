@@ -1,6 +1,5 @@
 package juego;
 
-import java.awt.Color;
 import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -15,7 +14,6 @@ public class Soldado {
 	double angulo;
 	boolean contacto;
 	Image img;
-	private Fuego[] fuegos;
 	private final int ALTURA_MAX_SALTO = 50;
 	private boolean saltandoArriba = true;
 	private int alturaSalto = 0;
@@ -29,7 +27,7 @@ public class Soldado {
 		this.ancho=ancho;
 		this.alto=alto;
 		this.angulo=angulo;
-		this.img =  Herramientas.cargarImagen("soldado.png");
+		this.img =  Herramientas.cargarImagen("imagenes/soldado.png");
 	}
 	public int getX() {
 		return (int) x;
@@ -61,12 +59,10 @@ public class Soldado {
 			pi = pi + Math.PI*signo;
 			signo = signo*-2;
 		}
-				
 		
 	}
 	
-	
-	
+	// movimientos de soldados
 	public void moverAtras() {
 		this.x += Math.cos(this.angulo)*2;
 		
@@ -81,6 +77,9 @@ public class Soldado {
 		this.y = this.y + dy;
 	}
 
+	
+	//salto de soldados voladores
+	
 	public void soldadoSaltar(Entorno entorno) {
 		if (!saltando)
 			saltando = true;
@@ -92,7 +91,7 @@ public class Soldado {
 				saltandoArriba = false;
 		}
 		if (saltando && !saltandoArriba) {
-			this.img =  Herramientas.cargarImagen("soldadovolador.png");
+			this.img =  Herramientas.cargarImagen("imagenes/soldadovolador.png");
 			this.subir(3);
 			alturaSalto -= 3;
 			if (alturaSalto <= 0) {
@@ -103,23 +102,6 @@ public class Soldado {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	public boolean rebote(Obstaculo obstaculo) {
-		if(( x ==obstaculo.x-obstaculo.ancho/2) ||( x == obstaculo.x+obstaculo.ancho/2) || (y == obstaculo.y-obstaculo.alto/2)|| (y == obstaculo.y+obstaculo.alto/2)) {
-			pi = pi + Math.PI*signo;
-			signo = signo*-1;
-			
-			return true;
-		}
-		else {
-			return false;
-		}
-	
-	}	
 	
 	public boolean toca(Soldado Soldado) {
 			
@@ -142,20 +124,6 @@ public class Soldado {
 		}
 	
 	}	
-	
-	public boolean quemon(Soldado soldado,Soldado soldado1) {
-		if(( soldado.x ==soldado1.x-soldado1.ancho/2) ||( soldado.x == soldado1.x+soldado1.ancho/2) || (soldado.y == soldado1.y-soldado1.alto/2)|| (soldado.y == soldado1.y+soldado1.alto/2)) {
-			pi = pi + Math.PI*signo;
-			signo = signo*-1;
-			
-			return true;
-		}
-		else {
-			return false;
-		}
-	
-	}
-
 	
 	
 	public boolean quema(Soldado soldado,Fuego fuegos) {
@@ -187,6 +155,7 @@ public class Soldado {
 		}
 	
 	}
+	//movimientos
 	public void moverAdelante() {
 		
 		this.x -= Math.cos(this.angulo)*2;
@@ -203,26 +172,14 @@ public class Soldado {
 public void moverAlas() {
 		
 		this.x -= Math.cos(this.angulo)*1;
-		this.y += Math.sin(this.angulo)*1;
-		
+				
 		
 		if (this.x < -50) {
 			this.x=1000;
 		}	
 		
-		
-		
 	}
 	
 	
-	public void pos(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	
 	}
 	
-	
-
-

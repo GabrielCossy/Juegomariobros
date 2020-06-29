@@ -21,7 +21,7 @@ public class Obstaculo {
 		this.alto=alto;
 		this.angulo=angulo;
 		this.contacto=false;
-		this.img =  Herramientas.cargarImagen("bloque.png");
+		this.img =  Herramientas.cargarImagen("imagenes/bloque.png");
 		
 	}
 	
@@ -39,77 +39,59 @@ public class Obstaculo {
 	}
 	public void moverAtras() {
 		this.x += Math.cos(this.angulo)*1;
-		//this.y += Math.sin(this.angulo)*2;
 		
-		//if (this.x > 850) {
-			//this.x=0;
-		//}
-			
 		if (this.x > 850) {
 			this.x=0;
 		}
 		if (this.x < -50) {
 			this.x=850;
-		}	
-		
-		
+		}			
 	}
 	
-	
-	public void delete() {
-		this.y=this.y+100;
-	}
 	public boolean tocaPrincesa(Princesa princesa) {
 		if(( x >princesa.x-princesa.ancho/2) &&( x < princesa.x+princesa.ancho/2) && (y > princesa.y-princesa.alto/2)&& (y < princesa.y+princesa.alto/2)) {
 			this.y=this.y+5000;
 			return true;
 		}
-		else {
+		else {	
 			return false;
+			}
+	}	
+		public boolean isContacto() {
+			return contacto;
 		}
-	
-	}
-	
-	
-	
-	
-	
-
-public boolean isContacto() {
-	return contacto;
-}
-public void setContacto(boolean contacto) {
-	this.contacto = contacto;	
-}
-public boolean toca(Fuego Fuego) {
-	
-	return x > Fuego.x - Fuego.ancho/2 && 
-			x < Fuego.x + Fuego.ancho/2 &&
-			y > Fuego.y - Fuego.alto/2 && 
-			y < Fuego.y + Fuego.alto/2 ;
+		public void setContacto(boolean contacto) {
+			this.contacto = contacto;	
+		}
+		
+		//colison
+		public boolean toca(Fuego Fuego) {
 			
-}
-public boolean toca(Obstaculo Obstaculo) {
-	
-	return x > Obstaculo.x - Obstaculo.ancho/2 && 
-			x < Obstaculo.x + Obstaculo.ancho/2 &&
-			y > Obstaculo.y - Obstaculo.alto/2 && 
-			y < Obstaculo.y + Obstaculo.alto/2 ;
+			return x > Fuego.x - Fuego.ancho/2 && 
+					x < Fuego.x + Fuego.ancho/2 &&
+					y > Fuego.y - Fuego.alto/2 && 
+					y < Fuego.y + Fuego.alto/2 ;
+					
+		}
+		public boolean toca(Obstaculo Obstaculo) {
 			
-}
+			return x > Obstaculo.x - Obstaculo.ancho/2 && 
+					x < Obstaculo.x + Obstaculo.ancho/2 &&
+					y > Obstaculo.y - Obstaculo.alto/2 && 
+					y < Obstaculo.y + Obstaculo.alto/2 ;
+					
+		}
 
-
-
-public void moverAdelante() {
-	if(x>0) {
-		x-=1.5;
-	}
-	else {
-		x=780;
-		this.contacto=false;
-	
-	}
-	
+		//movimiento para delante
+		
+		public void moverAdelante() {
+			if(x>0) {
+				x-=1.5;
+			}
+			else {
+				x=780;
+				this.contacto=false;
+			}
 }
 
 }
