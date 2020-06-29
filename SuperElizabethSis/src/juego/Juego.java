@@ -42,25 +42,34 @@ public class Juego extends InterfaceJuego
 	Soldado[] solant;
 	Juego()
 	{
+		
+		
+		
+		
 		// Inicializa el objeto entorno
 		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo ... - v1", 800, 600);	
 		this.fondo = Herramientas.cargarImagen("Cielo.png");
 		this.img = Herramientas.cargarImagen("fin.png");
+		
+		
+
+		
+		
 		// Inicializar lo que haga falta para el juego
 		// ...
 		this.fuegos=new Fuego[100];
 		this.princesa=new Princesa(100,490,20,40,0);
 		this.soldado=new Soldado[3];
-		this.obstaculo=new Obstaculo[4];
+		this.obstaculo=new Obstaculo[3];
 		this.nube=new Nube[3];
 		this.coin=new Coin[2];
 		
 		
 		//soldados iniciales
 		
-		this.soldado[0]=new Soldado(850,490,20,40,0);
-		this.soldado[1]=new Soldado(750,480,20,60,0);
-		this.soldado[2]=new Soldado(900,480,20,60,0);
+		this.soldado[0]=new Soldado(800,490,20,40,0);
+		this.soldado[1]=new Soldado(900,480,20,60,0);
+		this.soldado[2]=new Soldado(1000,480,20,60,0);
 		
 		
 		//obstaculos iniciales
@@ -69,7 +78,7 @@ public class Juego extends InterfaceJuego
 		this.obstaculo[0]=new Obstaculo(700,480,20,60,0);
 		this.obstaculo[1]=new Obstaculo(900,480,20,60,0);
 		this.obstaculo[2]=new Obstaculo(1200,480,20,60,0);
-		this.obstaculo[3]=new Obstaculo(1050,480,20,60,0);
+		
 		
 		//elementos
 		
@@ -85,7 +94,7 @@ public class Juego extends InterfaceJuego
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
-		
+	
 	}
 
 	/**
@@ -97,230 +106,128 @@ public class Juego extends InterfaceJuego
 	
 	public void tick()
 	{
-		// Procesamiento de un instante de tiempo
-		// ...
-		//this.fondo.dibujarse(entorno);
-		this.nube[0].moverAdelante();
-		this.nube[1].moverAdelante();
-		this.nube[2].moverAdelante();
-		
-		this.coin[0].moverAdelante();
-		this.coin[1].moverAdelante();
-		
-		this.obstaculo[0].moverAdelante();
-		this.obstaculo[1].moverAdelante();
-		this.obstaculo[2].moverAdelante();
-		this.obstaculo[3].moverAdelante();
-		/*this.soldado[0].moverAdelante();
-		this.soldado[1].moverAdelante();
-		this.soldado[2].moverAdelante();
-		this.soldado[3].moverAdelante();
-		*/
-		
-		
-		
-		
-		
-		
-		//movimiento soldados
-		for(int i=0;i<soldado.length;i++) {
-					for (int j=0; j<obstaculo.length; j++) { //control de colicion
-				if (obstaculo[j].x==soldado[i].x) 
-					pi = pi + Math.PI*signo;
-					signo = signo*-1;
-			}
-			soldado[i].moverAdelante(); //se le pasa el angulo a mover para indicar el sentido de mov
-}
-			
-		//Movimiento "princesa" 
-		if (entorno.sePresiono(entorno.TECLA_ARRIBA) || princesa.saltando)
-			princesa.princesaSaltar(entorno);
+		//fondo
 		this.entorno.dibujarImagen(this.fondo,400,300, 0);
+		
+		
 		for(int f=0;f<this.fuegos.length;f++) {
 			if(this.fuegos[f]!=null) {
 				this.fuegos[f].dibujarse(entorno);
 				this.fuegos[f].lanzar();
 				for(int i=0;i<soldado.length;i++) {
 				if(fuegos[f].Quema(soldado[i])){
-					
 					posc1=posc;
 					this.soldado[i]=new Soldado(posc,480,20,60,0);
-					
+					if (soldado[i].toca(soldado[i]));
+					this.x=950;
 					if (posc>1100) {
 						 posc=1000 ;
 					 }
-					
-					
 					if (posc1==posc){
 						 posc=posc+50;
 					 }
-					 
-						
-							
 					puntaje=puntaje+5;					
 					fuegos[f].delete();
-					
 						}
-				
 			}
-		}}
-		
-		
-		
-		
+		}
+			}
 		int j=0;
 		while(j<this.fuegos.length && this.fuegos[j]!=null) {
 			j++;
 		}
+		
+		//Movimiento "princesa" 
+		
+		if (entorno.sePresiono(entorno.TECLA_ARRIBA) || princesa.saltando)
+			princesa.princesaSaltar(entorno);
+
 		if(this.entorno.sePresiono(this.entorno.TECLA_ESPACIO)) {
 			this.fuegos[j]=princesa.dispararFuego();
-			
 		}
-		//fondo
-		
-				
-		
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
-			
 			princesa.moverAdelante();
 			
 		}
 		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
-			
 			princesa.moverAtras();
 		
 		}
 		
-		
-				
-		 //hay que corregir la inicialización
+		//Colision
 		
 		for(int i=0;i<obstaculo.length;i++) {
-			//for(int l=0;l<fuegos.length;l++) {
-				
-		
-		
-				if(princesa.toca(obstaculo[i]) && !obstaculo[i].contacto && Vidas!=0){	 
+			if(princesa.toca(obstaculo[i]) && !obstaculo[i].contacto && Vidas!=0){	 
 					obstaculo[i].setContacto(true);
 					this.obstaculo[i]=new Obstaculo(850,480,20,60,0);
 					Vidas--;
 					}
-			
-				/*if(fuegos[l].toca(soldado[i]) && !soldado[i].contacto ){
-					fuegos[l].setContacto(true);
-					fuegos[l].delete();
-					soldado[i].setContacto(true);
-					soldado[i].delete();
-					
-					}
-					*/
 			}
-		
-		
 		for(int i=0;i<soldado.length;i++) {
-			
-			
-		
 		if(princesa.toca(soldado[i]) && !soldado[i].contacto && Vidas!=0){	 
 			soldado[i].setContacto(true);
-			
-			soldado[i].delete();
-			
-			
-				Vidas--;
+			this.soldado[i]=new Soldado(850,480,20,60,0);
+			if (soldado[i].toca(soldado[i]));
+			this.x=950;
+			Vidas--;
 				}
 		}
-		
 		for(int i=0;i<coin.length;i++) {
-				
-				
-				
 				if(princesa.toca(coin[i]) ){	 
-						
-					
-					this.coin[i]=new Coin(850,cont,100,60,0);
+				this.coin[i]=new Coin(850,cont,100,60,0);
 					cont=cont+50;
 					puntaje=puntaje+5;
 				}
 				if (cont==450) {
 					cont=350;
 				}
-	
-					
 		}
-			
-						
-				
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		if (Vidas==0) {
 			this.entorno.dibujarImagen(this.img,400,300, 0);
-			
+			this.entorno.cambiarFont("Arial", 30, Color.white);
+			this.entorno.escribirTexto("Puntaje: " + puntaje, 550, 200);
 			fuego.delete();
 			
-			
 		}	
-		
-		
-		
-		
 		//dibujos
 		
 		
-
-		
-		
-			
-		
-		
 		this.princesa.dibujarse(this.entorno);
-		
-		this.nube[0].dibujarse(entorno);
-		this.nube[1].dibujarse(entorno);
-		this.nube[2].dibujarse(entorno);
-		
-		
-		this.coin[0].dibujarse(entorno);
-		this.coin[1].dibujarse(entorno);
 		
 		this.entorno.cambiarFont("Arial", 18, Color.white);
 		this.entorno.escribirTexto("Cantidad de vidas: " + Vidas, 550, 50);
 		this.entorno.cambiarFont("Arial", 18, Color.white);
 		this.entorno.escribirTexto("puntaje: " + puntaje, 550, 25);
 		
-
-	
-		
-		for(int i=0;i<obstaculo.length;i++) {
-			
-			this.obstaculo[i].dibujarse(this.entorno);
-			
-		
+		for(int i=0;i<nube.length;i++) {
+			this.nube[i].dibujarse(this.entorno);
 		}
-			
-		
-		
+		for(int i=0;i<coin.length;i++) {
+			this.coin[i].dibujarse(this.entorno);
+		}
+		for(int i=0;i<obstaculo.length;i++) {
+			this.obstaculo[i].dibujarse(this.entorno);
+					
+		}
+		//movimientos para adelante
 		
 		for(int i=0;i<soldado.length;i++) {
-			
-			
 			soldado[i].dibujarse(entorno);
-			
-				
-			
 		}
-		 
+		for(int i=0;i<nube.length;i++) {
+			this.nube[i].moverAdelante();
+		}for(int i=0;i<coin.length;i++) {
+			this.coin[i].moverAdelante();
+		}for(int i=0;i<obstaculo.length;i++) {
+			this.obstaculo[i].moverAdelante();
+		}
+		for(int i=0;i<soldado.length;i++) {
+			this.soldado[i].moverAdelante();
+						
+		}
 		
-			}
+		}
 		
 	
 

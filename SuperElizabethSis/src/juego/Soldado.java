@@ -82,11 +82,19 @@ public class Soldado {
 	
 	}	
 	
+	public boolean toca(Soldado Soldado) {
+			
+			return x > Soldado.x - Soldado.ancho/2 && 
+					x < Soldado.x + Soldado.ancho/2 &&
+					y > Soldado.y - Soldado.alto/2 && 
+					y < Soldado.y + Soldado.alto/2 ;
+					
+		}
+	
+	
 	
 	public boolean rebote(Soldado soldado,Soldado soldado1) {
 		if(( soldado.x ==soldado1.x-soldado1.ancho/2) ||( soldado.x == soldado1.x+soldado1.ancho/2) || (soldado.y == soldado1.y-soldado1.alto/2)|| (soldado.y == soldado1.y+soldado1.alto/2)) {
-			pi = pi + Math.PI*signo;
-			signo = signo*-1;
 			this.x=950;
 			return true;
 		}
