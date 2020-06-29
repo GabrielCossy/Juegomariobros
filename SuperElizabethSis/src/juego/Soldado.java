@@ -16,7 +16,10 @@ public class Soldado {
 	boolean contacto;
 	Image img;
 	private Fuego[] fuegos;
-	
+	private final int ALTURA_MAX_SALTO = 50;
+	private boolean saltandoArriba = true;
+	private int alturaSalto = 0;
+	public boolean saltando = false;
 	double pi = Math.PI;
 	int signo = -1;
 	
@@ -61,6 +64,9 @@ public class Soldado {
 				
 		
 	}
+	
+	
+	
 	public void moverAtras() {
 		this.x += Math.cos(this.angulo)*2;
 		
@@ -68,6 +74,39 @@ public class Soldado {
 			this.x=850;
 		}	
 	}	
+	
+	
+	
+	public void subir(int dy) {
+		this.y = this.y + dy;
+	}
+
+	public void soldadoSaltar(Entorno entorno) {
+		if (!saltando)
+			saltando = true;
+
+		if (alturaSalto < ALTURA_MAX_SALTO && saltandoArriba) {
+			this.subir(-3);
+			alturaSalto += 3;
+			if (alturaSalto >= ALTURA_MAX_SALTO)
+				saltandoArriba = false;
+		}
+		if (saltando && !saltandoArriba) {
+			this.img =  Herramientas.cargarImagen("soldadovolador.png");
+			this.subir(3);
+			alturaSalto -= 3;
+			if (alturaSalto <= 0) {
+				
+				saltandoArriba = true;
+				saltando = false;
+				alturaSalto = 0;
+			}
+		}
+	}
+	
+	
+	
+	
 	
 	public boolean rebote(Obstaculo obstaculo) {
 		if(( x ==obstaculo.x-obstaculo.ancho/2) ||( x == obstaculo.x+obstaculo.ancho/2) || (y == obstaculo.y-obstaculo.alto/2)|| (y == obstaculo.y+obstaculo.alto/2)) {
@@ -161,6 +200,21 @@ public class Soldado {
 		
 		
 	}
+public void moverAlas() {
+		
+		this.x -= Math.cos(this.angulo)*1;
+		this.y += Math.sin(this.angulo)*1;
+		
+		
+		if (this.x < -50) {
+			this.x=1000;
+		}	
+		
+		
+		
+	}
+	
+	
 	public void pos(int x, int y) {
 		this.x = x;
 		this.y = y;

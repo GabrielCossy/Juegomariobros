@@ -57,7 +57,7 @@ public class Obstaculo {
 	
 	
 	public void delete() {
-		this.y=this.y+5000;
+		this.y=this.y+100;
 	}
 	public boolean tocaPrincesa(Princesa princesa) {
 		if(( x >princesa.x-princesa.ancho/2) &&( x < princesa.x+princesa.ancho/2) && (y > princesa.y-princesa.alto/2)&& (y < princesa.y+princesa.alto/2)) {
@@ -69,6 +69,10 @@ public class Obstaculo {
 		}
 	
 	}
+	
+	
+	
+	
 	
 
 public boolean isContacto() {
@@ -85,6 +89,15 @@ public boolean toca(Fuego Fuego) {
 			y < Fuego.y + Fuego.alto/2 ;
 			
 }
+public boolean toca(Obstaculo Obstaculo) {
+	
+	return x > Obstaculo.x - Obstaculo.ancho/2 && 
+			x < Obstaculo.x + Obstaculo.ancho/2 &&
+			y > Obstaculo.y - Obstaculo.alto/2 && 
+			y < Obstaculo.y + Obstaculo.alto/2 ;
+			
+}
+
 
 
 public void moverAdelante() {
