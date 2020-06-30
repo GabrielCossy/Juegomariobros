@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Image;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -26,31 +25,14 @@ public class Obstaculo {
 	}
 	
 	
-
-	public void pos(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	
-	
-	
 	public void dibujarse(Entorno entorno) {
 		entorno.dibujarImagen(img, x, y, 0);
 	}
-	public void moverAtras() {
-		this.x += Math.cos(this.angulo)*1;
-		
-		if (this.x > 850) {
-			this.x=0;
-		}
-		if (this.x < -50) {
-			this.x=850;
-		}			
-	}
+	
 	
 	public boolean tocaPrincesa(Princesa princesa) {
 		if(( x >princesa.x-princesa.ancho/2) &&( x < princesa.x+princesa.ancho/2) && (y > princesa.y-princesa.alto/2)&& (y < princesa.y+princesa.alto/2)) {
-			this.y=this.y+5000;
+			
 			return true;
 		}
 		else {	
@@ -65,6 +47,8 @@ public class Obstaculo {
 		}
 		
 		//colison
+		
+		
 		public boolean toca(Fuego Fuego) {
 			
 			return x > Fuego.x - Fuego.ancho/2 && 

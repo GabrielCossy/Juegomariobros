@@ -119,7 +119,12 @@ public class Juego extends InterfaceJuego
 		}
 		
 		//Colision
-		
+		for(int i=1;i<soldado.length;i++) {
+		if(soldado[i-1].toca(soldado[i]) && !soldado[i].contacto && Vidas!=0){	 
+			soldado[i].setContacto(true);
+			this.soldado[i]=new Soldado(posc+50,480,20,60,0);
+		}
+		}
 		for(int i=0;i<obstaculo.length;i++) {
 			if(princesa.toca(obstaculo[i]) && !obstaculo[i].contacto && Vidas!=0){	 
 					obstaculo[i].setContacto(true);

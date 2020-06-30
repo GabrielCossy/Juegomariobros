@@ -12,7 +12,7 @@ public class Princesa {
 	double angulo;
 	int Vidas;
 	Image img;
-	private final int ALTURA_MAX_SALTO = 150;
+	private int ALTURA_MAX_SALTO = 150;
 	private boolean saltandoArriba = true;
 	private int alturaSalto = 0;
 	public boolean saltando = false;

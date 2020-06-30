@@ -29,16 +29,12 @@ public class Soldado {
 		this.angulo=angulo;
 		this.img =  Herramientas.cargarImagen("imagenes/soldado.png");
 	}
-	public int getX() {
-		return (int) x;
-	}
+	
 	
 	public void delete() {
 		this.y=this.y+5000;
 	}
-	public int getY() {
-		return (int) y;
-	}
+	
 	public void Agente(int x, int y) {
 		this.x = x;
 		this.y = y;
