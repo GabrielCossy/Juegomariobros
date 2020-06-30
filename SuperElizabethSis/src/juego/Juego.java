@@ -47,16 +47,15 @@ public class Juego extends InterfaceJuego
 		
 		
 		
+		// Cargamos entorno
 		
-		// Inicializa el objeto entorno
 		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo ... - v1", 800, 600);	
+		// Cargamos imagenes
 		this.fondo = Herramientas.cargarImagen("imagenes/Cielo.png");
 		this.img = Herramientas.cargarImagen("imagenes/fin.png");
 		this.noche = Herramientas.cargarImagen("imagenes/CieloNoche.png");
 		this.ganaste = Herramientas.cargarImagen("imagenes/ganaste1.png");
-		//this.salta = Herramientas.cargarSonido("jump.wav"); sonido fallido de salto
-		
-
+		//this.salta = Herramientas.cargarSonido("imagenes/jump.wav"); sonido fallido de salto
 		
 		
 		// Inicializar lo que haga falta para el juego
@@ -157,14 +156,13 @@ public class Juego extends InterfaceJuego
 		if (puntaje>=90 && puntaje<200) {
 			for(int i=0;i<soldado.length;i++) {
 				this.entorno.dibujarImagen(this.noche,400,300, 0);
-				
 				this.soldado[i].moverAlas();
-				
 				this.soldado[i].soldadoSaltar(entorno);
 				
 				}
 			}
-			
+		
+		
 		if (puntaje>=200) {
 			for(int i=0;i<soldado.length;i++) {
 				this.entorno.dibujarImagen(this.ganaste,400,300, 0);
@@ -172,9 +170,10 @@ public class Juego extends InterfaceJuego
 				this.entorno.escribirTexto("Puntaje: " + puntaje, 300,550);
 				fuego.delete();
 
-				
 				}
 			}
+		
+		
 		//dibujos
 		for(int f=0;f<this.fuegos.length;f++) {
 			if(this.fuegos[f]!=null) {

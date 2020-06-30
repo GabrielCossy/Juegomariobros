@@ -102,7 +102,7 @@ public class Princesa {
 	public void moverAtras() {
 			
 			this.x -= Math.cos(this.angulo)*2;
-			this.y += Math.sin(this.angulo)*2;
+			
 			
 			if (this.x > 850) {
 				this.x=0;
